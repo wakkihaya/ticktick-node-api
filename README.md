@@ -5,8 +5,8 @@ This is a Node.js wrapper for the TickTick API. It allows you to interact with y
 ## Installation
 
 ```bash
-npm install ticktick-node-api
-yarn add ticktick-node-api
+npm install ticktick-node-api-oauth2
+yarn add ticktick-node-api-oauth2
 ```
 
 ## Usage
@@ -14,7 +14,7 @@ yarn add ticktick-node-api
 Here is an example of how to use the TickTick Node API:
 
 ```javascript
-import TickTick from "ticktick-node-api";
+import TickTick from "ticktick-node-api-oauth2";
 
 // Initialize the TickTick client
 const clientId = "your_client_id";
