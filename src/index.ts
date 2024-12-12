@@ -43,7 +43,7 @@ export const authTickTick = ({
 }: AuthParams) => {
   return buildUrl(`${TICKTICK_AUTH_URL}`, {
     client_id: clientId,
-    scope: scopes.join(" "),
+    scope: encodeURIComponent(scopes.join(" ")),
     redirect_uri: redirectUri,
     response_type: "code",
     ...(state ? { state } : {}),
@@ -64,7 +64,7 @@ export const exchangeToken = async ({
       client_secret: clientSecret,
       code,
       grant_type: "authorization_code",
-      scope: scopes.join(" "),
+      scope: encodeURIComponent(scopes.join(" ")),
       redirect_uri: redirectUri,
     },
     {
