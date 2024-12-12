@@ -1,11 +1,26 @@
 {
   "name": "ticktick-node-api",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": "git@github.com:wakkihaya/ticktick-node-api.git",
   "author": "wakkihaya <wakkihaya@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.7.9"
-  }
+    "axios": "^1.7.9",
+    "typescript": "^5.7.2"
+  },
+  "private": false,
+  "scripts": {
+    "build": "yarn && tsc"
+  },
+  "description": "TickTick API for Node.js supporting OAuth2 flow",
+  "directories": {
+    "src": "src"
+  },
+  "keywords": [
+    "ticktick",
+    "oauth2",
+    "node"
+  ]
 }

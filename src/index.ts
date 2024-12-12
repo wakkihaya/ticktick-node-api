@@ -29,8 +29,8 @@ interface ExchangeCodeRes {
 export class TickTickNode {
   private clientId: string;
   private clientSecret: string;
-  private scopes: AuthScope[];
-  private redirectUri: string;
+  private scopes: AuthScope[] = [];
+  private redirectUri: string = "";
   private token: string | null = null;
   private axiosInstance: AxiosInstance;
 
