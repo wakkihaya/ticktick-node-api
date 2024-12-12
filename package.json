@@ -1,6 +1,6 @@
 {
   "name": "ticktick-node-api-oauth2",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "git@github.com:wakkihaya/ticktick-node-api.git",
@@ -10,6 +10,9 @@
     "axios": "^1.7.9",
     "typescript": "^5.7.2"
   },
+  "files": [
+    "/dist"
+  ],
   "private": false,
   "scripts": {
     "build": "yarn && tsc"
