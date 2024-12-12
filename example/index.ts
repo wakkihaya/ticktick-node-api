@@ -7,7 +7,7 @@ async function main() {
   // AUTH ====
   const authUrl = authTickTick({
     clientId,
-    scopes: ["projects:write"],
+    scopes: ["tasks:write"],
     redirectUri: "http://localhost:3000/auth/callback",
   });
 
@@ -15,7 +15,7 @@ async function main() {
     code: "your_code",
     clientId,
     clientSecret,
-    scopes: ["projects:write"],
+    scopes: ["tasks:write"],
     redirectUri: "http://localhost:3000/auth/callback",
   });
 
