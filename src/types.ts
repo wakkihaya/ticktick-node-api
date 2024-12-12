@@ -1,8 +1,4 @@
-export type AuthScope =
-  | "tasks:read"
-  | "tasks:write"
-  | "projects:read"
-  | "projects:write";
+export type AuthScope = "tasks:read" | "tasks:write";
 
 export type ViewMode = "list" | "kanban" | "timeline";
 

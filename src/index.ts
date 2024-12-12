@@ -60,8 +60,6 @@ export const exchangeToken = async ({
   const response = await axios.post(
     TICKTICK_TOKEN_URL,
     {
-      client_id: clientId,
-      client_secret: clientSecret,
       code,
       grant_type: "authorization_code",
       scope: encodeURIComponent(scopes.join(" ")),
@@ -70,6 +68,7 @@ export const exchangeToken = async ({
     {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
       },
     }
   );
