@@ -195,6 +195,10 @@ export class TickTickNode {
       `/project/${projectId}/task/${taskId}`,
       "DELETE"
     );
-    return { success: true
+    return {
+      success: true,
+    };
   }
 }
+
+export * from "./types";
