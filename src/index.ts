@@ -99,18 +99,14 @@ export class TickTickNode {
       throw new Error("No token available. Please authenticate first.");
     }
 
-    try {
-      const response = await this.axiosInstance({
-        ...config,
-        url: `${TICKTICK_API_BASE_URL}/${endpoint}`,
-        params: config?.params,
-        method,
-      });
+    const response = await this.axiosInstance({
+      ...config,
+      url: `${TICKTICK_API_BASE_URL}${endpoint}`,
+      params: config?.params,
+      method,
+    });
 
-      return response.data;
-    } catch (error: any) {
-      throw new Error(error);
-    }
+    return response.data;
   }
 
   public async fetchUserInfo() {
