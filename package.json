@@ -1,0 +1,8 @@
+{
+  "name": "ticktick-node-api",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:wakkihaya/ticktick-node-api.git",
+  "author": "wakkihaya <wakkihaya@gmail.com>",
+  "license": "MIT"
+}
