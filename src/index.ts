@@ -75,6 +75,7 @@ export const exchangeToken = async ({
   );
 
   const data = response.data as ExchangeCodeRes;
+  return data;
 };
 
 export class TickTickNode {
