@@ -16,73 +16,78 @@ import {
 } from "./types";
 import { buildUrl } from "./utils";
 
-interface AuthParam {
+interface AuthParams {
+  clientId: string;
   scopes: AuthScope[];
   redirectUri: string;
   state?: object;
+}
+
+interface ExchangeTokenParams {
+  code: string;
+  clientId: string;
+  clientSecret: string;
+  scopes: AuthScope[];
+  redirectUri: string;
 }
 
 interface ExchangeCodeRes {
   access_token: string;
 }
 
+export const authTickTick = ({
+  clientId,
+  scopes,
+  redirectUri,
+  state,
+}: AuthParams) => {
+  return buildUrl(`${TICKTICK_AUTH_URL}`, {
+    client_id: clientId,
+    scope: scopes.join(" "),
+    redirect_uri: redirectUri,
+    response_type: "code",
+    ...(state ? { state } : {}),
+  });
+};
+
+export const exchangeToken = async ({
+  code,
+  clientId,
+  clientSecret,
+  scopes,
+  redirectUri,
+}: ExchangeTokenParams) => {
+  const response = await axios.post(
+    TICKTICK_TOKEN_URL,
+    {
+      client_id: clientId,
+      client_secret: clientSecret,
+      code,
+      grant_type: "authorization_code",
+      scope: scopes.join(" "),
+      redirect_uri: redirectUri,
+    },
+    {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    }
+  );
+
+  const data = response.data as ExchangeCodeRes;
+};
+
 export class TickTickNode {
-  private clientId: string;
-  private clientSecret: string;
-  private scopes: AuthScope[] = [];
-  private redirectUri: string = "";
   private token: string | null = null;
   private axiosInstance: AxiosInstance;
 
-  constructor(clientId: string, clientSecret: string) {
-    this.clientId = clientId;
-    this.clientSecret = clientSecret;
-    this.axiosInstance = axios.create();
-  }
-
-  public auth({ scopes, redirectUri, state }: AuthParam): string {
-    this.scopes = scopes;
-    this.redirectUri = redirectUri;
-
-    return buildUrl(`${TICKTICK_AUTH_URL}`, {
-      client_id: this.clientId,
-      scope: scopes.join(" "),
-      redirect_uri: redirectUri,
-      response_type: "code",
-      ...(state ? { state } : {}),
+  constructor(token: string) {
+    this.token = token;
+    this.axiosInstance = axios.create({
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
     });
-  }
-
-  public async exchangeCode(code: string) {
-    try {
-      const response = await axios.post(
-        TICKTICK_TOKEN_URL,
-        {
-          client_id: this.clientId,
-          client_secret: this.clientSecret,
-          code,
-          grant_type: "authorization_code",
-          scope: this.scopes,
-          redirect_uri: this.redirectUri,
-        },
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      );
-
-      const data = response.data as ExchangeCodeRes;
-      this.token = data.access_token;
-      this.axiosInstance.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${this.token}`;
-
-      return data;
-    } catch (error) {
-      console.error("Error exchanging code for token:", error);
-      throw error;
-    }
   }
 
   private async callTickTickAppApi(
