@@ -1,6 +1,6 @@
 {
   "name": "ticktick-node-api-oauth2",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "git@github.com:wakkihaya/ticktick-node-api.git",

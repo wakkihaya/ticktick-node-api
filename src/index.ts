@@ -20,7 +20,7 @@ interface AuthParams {
   clientId: string;
   scopes: AuthScope[];
   redirectUri: string;
-  state?: object;
+  state?: string;
 }
 
 interface ExchangeTokenParams {
