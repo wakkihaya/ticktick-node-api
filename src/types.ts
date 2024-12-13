@@ -26,6 +26,7 @@ export interface Task {
   startDate?: string; // date-time in "yyyy-MM-dd'T'HH:mm:ssZ" format
   status?: number; // integer (int32) - Values: Normal: 0, Completed: 2
   timeZone?: string; // Task timezone
+  tags?: string[];
 }
 
 export interface ChecklistItem {
