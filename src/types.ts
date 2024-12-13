@@ -73,4 +73,4 @@ export interface CreateProjectArg {
 
 export type UpdateProjectArg = Partial<CreateProjectArg>;
 
-export type CreateTaskArg = Omit<Task, "projectId" | "id">;
+export type CreateTaskArg = Omit<Task, "id">;
