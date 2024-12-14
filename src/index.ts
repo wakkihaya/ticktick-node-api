@@ -15,6 +15,7 @@ import {
   UserInfo,
 } from "./types";
 import { buildUrl } from "./utils";
+import { Buffer } from "buffer";
 
 interface AuthParams {
   clientId: string;
@@ -57,6 +58,8 @@ export const exchangeToken = async ({
   scopes,
   redirectUri,
 }: ExchangeTokenParams) => {
+  const auth = new Buffer(`${clientId}:${clientSecret}`).toString("base64");
+
   const response = await axios.post(
     TICKTICK_TOKEN_URL,
     {
@@ -68,7 +71,7 @@ export const exchangeToken = async ({
     {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
+        Authorization: `Basic ${auth}`,
       },
     }
   );
